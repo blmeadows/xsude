@@ -10,7 +10,7 @@ libraryDependencies ++= Seq(
 
 scalaxbSettings
 
-packageName in scalaxb in Compile := "xsude"
+packageName in scalaxb in Compile := "cl._8o.rb.xsude.xsd"
 
 sourceGenerators in Compile <+= scalaxb in Compile
 
