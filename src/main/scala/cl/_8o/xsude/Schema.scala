@@ -20,6 +20,10 @@ object Cardinality {
   def apply(min: Int, max: Int): Cardinality = Cardinality(min, Some(max))
 }
 
+sealed trait Annotation
+case class Documentation(content: String) extends Annotation
+case class AppInfo      (content: String) extends Annotation
+
 sealed trait ElementType
 
 sealed trait SchemaThing
@@ -37,6 +41,7 @@ case class All     (children: Seq[SchemaThing], occurs: Cardinality) extends Exp
 
 case class Schema(
   content: Seq[SchemaThing]
+, annotations: Seq[Annotation]
 , id: String
 , version: String
 , targetNamespace: String
