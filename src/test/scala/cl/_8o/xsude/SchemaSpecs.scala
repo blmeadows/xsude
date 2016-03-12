@@ -39,7 +39,7 @@ class SchemaSpecs extends FunSpec {
       }
     }
 
-    it("has an alternative constructors for passing a non-option upper bound") {
+    it("has an alternative constructor for passing a non-option upper bound") {
       val c = Cardinality(1, 10)
       assert(c === Cardinality(1, Some(10)))
     }
