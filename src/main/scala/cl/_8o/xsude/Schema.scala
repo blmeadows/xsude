@@ -17,5 +17,26 @@ object Cardinality {
   def apply(min: Int, max: Int): Cardinality = Cardinality(min, Some(max))
 }
 
+sealed trait ElementType
+
+sealed trait SchemaThing
+case class Element()     extends SchemaThing
+case class ComplexType() extends SchemaThing with ElementType
+case class SimpleType()  extends SchemaThing with ElementType
+
+sealed trait ExplicitGroup {
+  val children: Seq[SchemaThing]
+  val occurs: Cardinality
+}
+case class Sequence(children: Seq[SchemaThing], occurs: Cardinality) extends ExplicitGroup
+case class Choice  (children: Seq[SchemaThing], occurs: Cardinality) extends ExplicitGroup
+case class All     (children: Seq[SchemaThing], occurs: Cardinality) extends ExplicitGroup
+
+case class Schema(
+  content: Seq[SchemaThing]
+, id: String
+, version: String
+, targetNamespace: String
+)
 
 
