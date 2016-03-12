@@ -12,14 +12,14 @@ class SchemaSpecs extends FunSpec {
       intercept[IllegalArgumentException] { Cardinality(-10, None) }
     }
 
-    it("doesn't allow negative of null maximum bounds") {
+    it("doesn't allow non-positive maximum bounds") {
       intercept[IllegalArgumentException] { Cardinality(0, Some(-5)) }
       intercept[IllegalArgumentException] { Cardinality(0, Some( 0)) }
     }
 
     it("doesn't allow maximum bounds less than the minimum bound") {
-      intercept[IllegalArgumentException] { Cardinality(1, Some(-5)) }
-      intercept[IllegalArgumentException] { Cardinality(0, Some( 0)) }
+      intercept[IllegalArgumentException] { Cardinality(4, Some(3)) }
+      intercept[IllegalArgumentException] { Cardinality(9, Some(5)) }
     }
 
     it("knows if a given number satisfies the bounds") {
