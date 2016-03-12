@@ -12,6 +12,9 @@ case class Cardinality(
   def !∈:(n: Int): Boolean = !(n ∈: this)
   def isUnbounded: Boolean = max.isEmpty
   def isOptional: Boolean = min == 0
+  override def toString =
+    if (max.exists(_ == min)) s"Cardinality($min)"
+    else                      s"Cardinality($min, ${max.getOrElse("∞")})"
 }
 object Cardinality {
   def apply(min: Int, max: Int): Cardinality = Cardinality(min, Some(max))

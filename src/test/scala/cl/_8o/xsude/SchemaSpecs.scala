@@ -43,6 +43,12 @@ class SchemaSpecs extends FunSpec {
       val c = Cardinality(1, 10)
       assert(c === Cardinality(1, Some(10)))
     }
+
+    it("has a cool string representation") {
+      assert(Cardinality(2, 2)   .toString === "Cardinality(2)")
+      assert(Cardinality(5, 9)   .toString === "Cardinality(5, 9)")
+      assert(Cardinality(5, None).toString === "Cardinality(5, ∞)")
+    }
   }
 
 }
