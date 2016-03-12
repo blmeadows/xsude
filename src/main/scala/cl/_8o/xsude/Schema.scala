@@ -4,9 +4,9 @@ case class Cardinality(
   min: Int = 1
 , max: Option[Int] = Some(1)  // None means unbounded
 ) {
-  require(max.forall(min <= _))
-  require(min >= 0)
+  require(min          >= 0 )
   require(max.forall(_ >= 1))
+  require(max.forall(_ >= min))
 
   def ∈:(n: Int): Boolean = min <= n && max.forall(_ >= n)
   def !∈:(n: Int): Boolean = !(n ∈: this)
