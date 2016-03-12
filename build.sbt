@@ -3,14 +3,14 @@ import ScalaxbKeys._
 scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
-  "org.scalatest"  % "scalatest_2.11" % "2.2.6" % "test"
+  "org.scalatest"          %  "scalatest_2.11"           % "2.2.6"     % "test"
 , "org.scala-lang"         %  "scala-xml"                % "2.11.0-M4"
 , "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4"
 )
 
 scalaxbSettings
 
-packageName in scalaxb in Compile := "cl._8o.rb.xsude.xsd"
+packageName in scalaxb in Compile := "cl._8o.xsude.xsd"
 
 sourceGenerators in Compile <+= scalaxb in Compile
 

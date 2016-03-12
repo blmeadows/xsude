@@ -1,4 +1,4 @@
-package cl._8o.rb.xsude
+package cl._8o.xsude
 package xsd
 
 import org.scalatest.FunSuite
