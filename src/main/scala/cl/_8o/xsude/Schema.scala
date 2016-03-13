@@ -25,19 +25,27 @@ case class Documentation(content: String) extends Annotation
 case class AppInfo      (content: String) extends Annotation
 
 sealed trait ElementType
+case class ComplexType(group: Group)   extends ElementType
+case class SimpleType ()               extends ElementType
+case class NamedType(typeName: String) extends ElementType
+
+sealed trait GroupType
+case object Sequence extends GroupType
+case object Choice   extends GroupType
+case object All      extends GroupType
+
+sealed trait Grouped
+
+case class Group(
+  groupType: GroupType
+, children: Seq[Grouped]
+, occurs: Cardinality
+) extends Grouped
 
 sealed trait SchemaThing
-case class Element()     extends SchemaThing
-case class ComplexType() extends SchemaThing with ElementType
-case class SimpleType()  extends SchemaThing with ElementType
-
-sealed trait ExplicitGroup {
-  val children: Seq[SchemaThing]
-  val occurs: Cardinality
-}
-case class Sequence(children: Seq[SchemaThing], occurs: Cardinality) extends ExplicitGroup
-case class Choice  (children: Seq[SchemaThing], occurs: Cardinality) extends ExplicitGroup
-case class All     (children: Seq[SchemaThing], occurs: Cardinality) extends ExplicitGroup
+case class Element(_type: ElementType, occurs: Cardinality) extends SchemaThing with Grouped
+case class TopLevelComplexType(name: String, _type: ComplexType) extends SchemaThing
+case class TopLevelSimpleType (name: String, _type: SimpleType ) extends SchemaThing
 
 case class Schema(
   content: Seq[SchemaThing]
@@ -46,5 +54,4 @@ case class Schema(
 , version: String
 , targetNamespace: String
 )
-
 
